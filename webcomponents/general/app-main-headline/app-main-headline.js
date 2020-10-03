@@ -81,12 +81,62 @@ export default class MainHeadline extends LitElement {
 
   }
 
-  createRenderRoot() {
+  createRenderRoot(){
     return this;
+  }
+
+}
+
+export class MainHeadlineList extends MainHeadline {
+
+  constructor(){
+    super();
+  }
+
+  static get styles() {
+    return css`
+      #main-headline-list {
+        width: 100%;
+        min-height: 300px;
+      }
+      a {
+        color: #000;
+      }      
+    `;
+  }
+
+  shouldUpdate(){
+    if (!this.data) return false;
+    return true;
+  }
+
+  render() {
+    return html`
+      <div id="main-headline-list">
+        ${this.data.map((article, i) => {
+          const date = date_format(article.publishedAt);
+          return html`
+            <h1><a href="${article.url}">${article.title}</a></h1>
+            <h5>${article.description}</h5>
+            <p class="author">${article.source.name} | <span>${date}</span></p>
+            ${article.author && html`<p class="author">di ${article.author}</p>` || ''}
+            ${this.data[i+1] ? html`<hr>` : ''}                       
+          `
+        })}     
+      </div>
+    `;
+  }
+
+  createRenderRoot(){
+    return this.attachShadow({mode: 'open'});
   }
 
 }
 
 if (!customElements.get('app-main-headline')) {
   customElements.define('app-main-headline', MainHeadline);
+}
+
+if (!customElements.get('app-main-headline-list')) {
+  customElements.define('app-main-headline-list', MainHeadlineList);
 }

@@ -29,9 +29,8 @@ export default class HardLayout extends LitElement {
     let more = this.data.articles.slice(2, 5);
     let sidebar = this.data.articles.slice(5, 8);
     return html`
-      <app-header></app-header>
+      <app-header .profile=${'hard'}></app-header>
       <app-menu></app-menu>
-      HARD
       <!-- BEGIN CONTENT WRAPPER -->
       <div id="content-wrapper">
         <!-- BEGIN MAIN -->
@@ -48,6 +47,25 @@ export default class HardLayout extends LitElement {
         <!-- END SIDEBARS -->
       </div>
       <!-- END CONTENT WRAPPER -->
+      <div id="extras">
+        <div id="recommended">
+          <h2 class="heading">Recommended Stories</h2>
+          <ul>
+            <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit &raquo;</a></li>
+            <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit &raquo;</a></li>
+            <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit &raquo;</a></li>
+            <li class="last"><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit &raquo;</a></li>
+          </ul>
+        </div>
+        <div id="programs">
+          <h2 class="heading">What's On Tonight</h2>
+          <img src="/assets/img/rick.jpg" alt="" /> <img src="/assets/img/cbc.png" alt="" /> 
+        </div>
+        <div id="cartoon">
+          <h2 class="heading">Humour</h2>
+          <img src="/assets/img/cartoon.jpg" alt="" /> 
+        </div>
+      </div>
     `;
   }
 

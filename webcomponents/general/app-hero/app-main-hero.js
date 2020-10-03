@@ -17,11 +17,13 @@ export default class Hero extends LitElement {
 
   shouldUpdate(){
     if (!this.data) return false;
+
     return true;
   }
 
   render() {
     const article = this.data;
+    if (!article.urlToImage) return html`<div id="hero"></div>`;
     return html`
       <div id="hero">
         <div class="hero_container">

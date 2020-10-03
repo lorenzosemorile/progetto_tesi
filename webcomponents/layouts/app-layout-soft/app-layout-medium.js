@@ -1,4 +1,4 @@
-import {LitElement, html, css, unsafeCSS} from "lit-element";
+import {LitElement, html} from "lit-element";
 import '../../general/app-header/app-header';
 import '../../general/app-menu/app-menu';
 import '../../general/app-main-headline/app-main-headline';
@@ -7,24 +7,45 @@ import '../../general/app-sidebar/app-sidebar';
 
 export default class MediumLayout extends LitElement {
 
+  constructor(){
+    super();
+    this.data = null;
+  }
+
+  static get properties() {
+    return {
+      data: {type: Object}
+    }
+  };
+
   render() {
+    let more = this.data.articles.slice(2, 7);
     return html`
-      <app-header></app-header>
-      <app-menu></app-menu>
-      MEDIUM
+      <style>
+        #main {
+          width: 980px;
+          margin: 0;
+        }        
+        #headlines{
+          float: left;
+          width: 980px;
+        }
+        #more-headlines{
+          width: 540px;
+        }  
+      </style>
+      <app-header .profile=${'medium'}></app-header>
+      <app-menu></app-menu>      
       <!-- BEGIN CONTENT WRAPPER -->
       <div id="content-wrapper">
         <!-- BEGIN MAIN -->
         <div id="main">
-          <div id="headlines">
-            <app-main-headline></app-main-headline>
-            <app-more-headlines></app-more-headlines>
+          <div id="headlines">            
+            <app-main-headline .data="${this.data.articles[0]}"></app-main-headline>
+            <app-more-headlines .data="${more}"></app-more-headlines>
           </div>
         </div>
         <!-- END MAIN -->
-        <!-- BEGIN SIDEBARS -->
-        <app-sidebar></app-sidebar>
-        <!-- END SIDEBARS -->
       </div>
       <!-- END CONTENT WRAPPER -->
     `;

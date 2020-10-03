@@ -10,3 +10,7 @@ export const read_cookie = () => {
   return JSON.parse(cookie);
 
 };
+
+export const write_cookie = (obj = {layout : 'soft', 'data' : 'soft'}) => {
+  document.cookie = `emotional=${JSON.stringify(obj)}`;
+};

@@ -1,9 +1,7 @@
 import {LitElement, html, css, unsafeCSS} from "lit-element";
 import '../../general/app-header/app-header';
 import '../../general/app-menu/app-menu';
-import '../../general/app-main-headline/app-main-headline';
-import '../../general/app-more-headlines/app-more-headlines';
-import '../../general/app-sidebar/app-sidebar';
+import "../../general/app-main-headline/app-main-headline";
 
 export default class SoftLayout extends LitElement {
 
@@ -24,23 +22,24 @@ export default class SoftLayout extends LitElement {
   }
 
   render() {
+    let list = this.data.articles.slice(0, 10);
     return html`
-      <app-header></app-header>
+      <style>
+        #main, #headlines {
+          width: 100%;
+        }
+      </style>
+      <app-header .profile=${'soft'}></app-header>
       <app-menu></app-menu>
-      SOFT
       <!-- BEGIN CONTENT WRAPPER -->
       <div id="content-wrapper">
         <!-- BEGIN MAIN -->
         <div id="main">
           <div id="headlines">
-            <app-main-headline .data=${this.data}></app-main-headline>
-            <app-more-headlines></app-more-headlines>
+            <app-main-headline-list .data=${this.data.articles}></app-main-headline-list>            
           </div>
         </div>
-        <!-- END MAIN -->
-        <!-- BEGIN SIDEBARS -->
-        <app-sidebar></app-sidebar>
-        <!-- END SIDEBARS -->
+        <!-- END MAIN -->        
       </div>
       <!-- END CONTENT WRAPPER -->
     `;

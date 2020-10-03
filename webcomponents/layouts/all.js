@@ -11,7 +11,17 @@ export default class Portal extends LitElement {
     super();
     this.key = '07ee10d2a94a4182a2b1985bebbb1d23';
     this.data = null;
-    //this.get_data(this.url_sources);
+
+    document.addEventListener('history:change', (e) => {
+
+      let category = e.detail.category;
+      if (e.detail.category === 'all'){
+        category = null;
+      }
+
+      this.category = category;
+      this.data = null;
+    });
   }
 
   static get properties() {
@@ -21,11 +31,12 @@ export default class Portal extends LitElement {
   };
 
   get url (){
-    return `http://newsapi.org/v2/top-headlines?pageSize=50&country=it&apiKey=${this.key}`;
-  }
-
-  get url_sources(){
-    return `https://newsapi.org/v2/sources?&apiKey=${this.key}`;
+    let base = 'http://newsapi.org/v2/top-headlines';
+    let qs = `?pageSize=50&country=it&apiKey=${this.key}`;
+    if (this.category){
+      return `${base}${qs}&category=${this.category}`;
+    }
+    return `${base}${qs}`;
   }
 
   async get_data(url = null) {
@@ -62,7 +73,7 @@ export default class Portal extends LitElement {
   set data(value) {
     const oldValue = this._data;
 
-    if (value) {
+    if (value && !this.category) {
       const sources = get_sources_for_profile(this.data_type);
       console.log(this.data_type);
       console.log(sources);
