@@ -66,8 +66,9 @@ export default class SelectCookie extends LitElement {
     let {type} = element.dataset;
     let value = element.options[element.selectedIndex].text;
     this.cookie[type] = value;
-    window.location = 'http://localhost:8000/';
     write_cookie(this.cookie);
+    window.location = 'http://localhost:8000/';
+
   }
 
 }

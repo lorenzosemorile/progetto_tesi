@@ -57,9 +57,9 @@ export default class Menu extends LitElement {
   }
 
   route(e){
-    const href = e.target.href;
     const title = e.target.innerHTML;
-    const category = e.target.dataset.category;
+    const {href} = e.target;
+    const {category} = e.target.dataset;
     window.history.pushState({}, title, href);
 
     const event = new CustomEvent(`history:change`, {
@@ -69,14 +69,6 @@ export default class Menu extends LitElement {
 
     document.dispatchEvent(event);
     e.preventDefault();
-  }
-
-  go(e){
-    e.preventDefault();
-    const {direction} = e.currentTarget.dataset;
-    const {position} = this.data.configs;
-    const event = new CustomEvent(`item_container:change_direction`, { detail: {direction, position}, bubbles: true, composed: true });
-    this.dispatchEvent(event);
   }
 
   createRenderRoot() {

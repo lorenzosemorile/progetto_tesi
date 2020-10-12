@@ -21,7 +21,7 @@ export default class MainHeadline extends LitElement {
 
     let param = '';
     param = this.data.title.split(' ');
-    param = param.slice(0, 2);
+    param = param.slice(0, 3);
     param = param.join(' ');
 
     var opts = {

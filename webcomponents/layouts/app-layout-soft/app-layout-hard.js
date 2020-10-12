@@ -26,18 +26,21 @@ export default class HardLayout extends LitElement {
   }
 
   render() {
+    let hero_article = this.data.articles[0];
+    let main_article = this.data.articles[1];
     let more = this.data.articles.slice(2, 5);
     let sidebar = this.data.articles.slice(5, 8);
+    let recommended = this.data.articles.slice(8, 11);
     return html`
       <app-header .profile=${'hard'}></app-header>
       <app-menu></app-menu>
       <!-- BEGIN CONTENT WRAPPER -->
       <div id="content-wrapper">
         <!-- BEGIN MAIN -->
-        <app-hero .data="${this.data.articles[0]}"></app-hero>
+        <app-hero .data="${hero_article}"></app-hero>
         <div id="main">
           <div id="headlines">            
-            <app-main-headline .data="${this.data.articles[1]}"></app-main-headline>
+            <app-main-headline .data="${main_article}"></app-main-headline>
             <app-more-headlines .data="${more}"></app-more-headlines>
           </div>
         </div>
@@ -51,10 +54,11 @@ export default class HardLayout extends LitElement {
         <div id="recommended">
           <h2 class="heading">Recommended Stories</h2>
           <ul>
-            <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit &raquo;</a></li>
-            <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit &raquo;</a></li>
-            <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit &raquo;</a></li>
-            <li class="last"><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit &raquo;</a></li>
+            ${recommended.map(article => {
+              return html`
+                <li><a href="${article.url}">${article.title}</a></li>  
+              `
+            })}
           </ul>
         </div>
         <div id="programs">

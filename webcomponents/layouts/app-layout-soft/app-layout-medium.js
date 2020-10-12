@@ -19,7 +19,8 @@ export default class MediumLayout extends LitElement {
   };
 
   render() {
-    let more = this.data.articles.slice(2, 7);
+    let main_article = this.data.articles[0];
+    let more = this.data.articles.slice(1, 6);
     return html`
       <style>
         #main {
@@ -41,7 +42,7 @@ export default class MediumLayout extends LitElement {
         <!-- BEGIN MAIN -->
         <div id="main">
           <div id="headlines">            
-            <app-main-headline .data="${this.data.articles[0]}"></app-main-headline>
+            <app-main-headline .data="${main_article}"></app-main-headline>
             <app-more-headlines .data="${more}"></app-more-headlines>
           </div>
         </div>

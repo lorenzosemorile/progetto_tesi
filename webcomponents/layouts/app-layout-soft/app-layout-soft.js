@@ -1,4 +1,4 @@
-import {LitElement, html, css, unsafeCSS} from "lit-element";
+import {LitElement, html} from "lit-element";
 import '../../general/app-header/app-header';
 import '../../general/app-menu/app-menu';
 import "../../general/app-main-headline/app-main-headline";
@@ -23,6 +23,7 @@ export default class SoftLayout extends LitElement {
 
   render() {
     let list = this.data.articles.slice(0, 10);
+    console.log(list.length);
     return html`
       <style>
         #main, #headlines {
@@ -36,7 +37,7 @@ export default class SoftLayout extends LitElement {
         <!-- BEGIN MAIN -->
         <div id="main">
           <div id="headlines">
-            <app-main-headline-list .data=${this.data.articles}></app-main-headline-list>            
+            <app-main-headline-list .data=${list}></app-main-headline-list>            
           </div>
         </div>
         <!-- END MAIN -->        
