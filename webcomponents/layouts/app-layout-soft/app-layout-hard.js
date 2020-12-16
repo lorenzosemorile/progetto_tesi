@@ -28,9 +28,9 @@ export default class HardLayout extends LitElement {
   render() {
     let hero_article = this.data.articles[0];
     let main_article = this.data.articles[1];
-    let more = this.data.articles.slice(2, 5);
-    let sidebar = this.data.articles.slice(5, 8);
-    let recommended = this.data.articles.slice(8, 11);
+    let more = this.data.articles.slice(2, 5); // 3 articoli
+    let sidebar = this.data.articles.slice(5, 8); // 3 articoli
+    let recommended = this.data.articles.slice(8, 11); // 3 articoli
     return html`
       <app-header .profile=${'hard'}></app-header>
       <app-menu></app-menu>

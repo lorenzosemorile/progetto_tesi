@@ -24,7 +24,7 @@ export default class Sidebar extends LitElement {
   }
 
   async get_books() {
-
+    if (!this.data[0]) return;
     let param = this.data[0].title.split(' ');
     param = param.slice(0, 2);
     param = param.join(' ');
@@ -54,6 +54,7 @@ export default class Sidebar extends LitElement {
 
     if (resp) {
       this.books = await resp;
+      console.log(this.books);
     }
 
     return null;
@@ -62,6 +63,7 @@ export default class Sidebar extends LitElement {
   render() {
     const article = this.data[0];
     const articles = this.data.slice(1, 3);
+    if (!article) return '';
     return html`
       <!-- BEGIN SIDEBARS -->
         <div id="sidebars">
